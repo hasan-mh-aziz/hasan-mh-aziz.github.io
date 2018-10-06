@@ -1,0 +1,68 @@
+<head>
+	<title>
+		FPL League Extractor
+	</title>
+</head>
+<link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/select2.min.css"/>
+ 
+<script type="text/javascript" src="js/datatables.min.js"></script>
+<script type="text/javascript" src="js/select2.full.min.js"></script>
+
+
+<body style="margin: 50px;">
+	<div id="ajaxLoaderDiv" style="
+		display:	none;
+	    position:   fixed;
+	    z-index:    1000;
+	    top:        0;
+	    left:       0;
+	    height:     100%;
+	    width:      100%;
+	    background: rgba( 255, 255, 255, .8 ) 
+	                url('ajax-loader.gif') 
+	                50% 50% 
+	                no-repeat;"
+    >
+    	Loading
+	</div>
+	<div>
+		<label>Enter the number of the gameweek for link to the point(default 1) :</label>
+		<div style="clear:both;"></div> 
+		<input type="number" id="gameWeekInput">
+	</div>
+	<div style="margin-top:30px;">
+		<label>Give league ID or select a league :</label>
+		<div style="clear:both;"></div> 
+		<input id="leagueInput" type="number" class="leagueIDInput">
+		<button class="searchButton">Search</button>
+		<span style="margin-left:30px;margin-right:30px;">OR</span>
+		<select id="leagueSelect" class="leagueIDInput convert2select2">
+			<option></option>
+			<option value="1087759">Bino Lone Survivor Challenge</option>
+		</select>
+		<button class="searchButton">Search</button>
+	</div>
+
+	<div style="margin-top: 50px;">
+
+		<table id="playerListTable">
+			<thead>
+				<tr>
+					<td>#GW Rank</td>
+					<td>GW Total Point</td>
+					<td>Transfer Point</td>
+					<td>Net GW Point</td>
+					<td>Total Ponit</td>
+					<td>Rank</td>
+					<td>Team link</td>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+	</div>
+</body>
+
+<script type="text/javascript" src="js/loneSurvivor.js"></script>
