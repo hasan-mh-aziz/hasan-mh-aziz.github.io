@@ -124,7 +124,7 @@ $(document).on("ready", function(){
       .then((datas) => {
         const playerReq = datas.reduce((accumulator, data) => {
           const currentIterationPlayerReq = data.standings.results.map((playerData) => {
-            return {playerData.player_name: getPlayerDataById(playerData.entry, gw)};
+            return getPlayerDataById(playerData.entry, gw);
           });
           return accumulator.concat(currentIterationPlayerReq);
         }, []);
