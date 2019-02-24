@@ -27,7 +27,6 @@ const getPlayerDataById = (playerId, gw, playerName) => {
         type: 'GET',
         crossDomain: true,
         success: function (data) {
-          console.log(playerName);
           resolve({[playerName]: data});
       },
         error: function(err) {console.log(err)},
@@ -135,10 +134,13 @@ $(document).on("ready", function(){
       .then((datas) => {
         console.log(datas)
         const rowDatas = datas.reduce((accumulator, data) => {
-          playerData = data.entry_history;
+          const playerName = Object.keys(data)
+          console.log(playerName[0]);
+          playerData = data[playerName[0]].entry_history;
           const managerProfileLink = 'https://fantasy.premierleague.com/a/team/' + playerData.entry + '/event/' + gw;
           const tableRow = [
             '',
+            playerName[0],
             playerData.points,
             playerData.event_transfers_cost,
             playerData.points - playerData.event_transfers_cost,
