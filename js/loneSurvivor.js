@@ -20,14 +20,15 @@ const getLeagueDataFromFplByLeagueIdAndPageNo = (leagueId, pageNo) => {
   });
 }
 
-const getPlayerDataById = (playerId, gw) => {
+const getPlayerDataById = (playerId, gw, playerName) => {
   return new Promise((resolve, reject) => {
     $.ajax({
         url: `https://fantasy.premierleague.com/drf/entry/${playerId}/event/${gw}/picks`,
         type: 'GET',
         crossDomain: true,
         success: function (data) {
-          resolve(data);
+          console.log(playerName);
+          resolve({[playerName]: data});
       },
         error: function(err) {console.log(err)},
     });
@@ -124,7 +125,7 @@ $(document).on("ready", function(){
       .then((datas) => {
         const playerReq = datas.reduce((accumulator, data) => {
           const currentIterationPlayerReq = data.standings.results.map((playerData) => {
-            return getPlayerDataById(playerData.entry, gw);
+            return getPlayerDataById(playerData.entry, gw, playerData.player_name);
           });
           return accumulator.concat(currentIterationPlayerReq);
         }, []);
