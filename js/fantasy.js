@@ -56,7 +56,7 @@ $.ajax({
   url: 'https://fantasy.premierleague.com/api/entry/201506/',
   type: "GET",
   success: function(data, textStatus, jqXHR) {
-    $("#gameWeekInput").val(data.entry.current_event);
+    $("#gameWeekInput").val(data.current_event);
   },
   error: function(jqXHR, textStatus, errorThrown) {
 
