@@ -26,10 +26,11 @@ const findTotalPageOfLeague = (leagueId) => {
 
   let lowerPoint = 0;
   let higherPoint = 512;
+  let iterations = 0;
   while(true) {
     currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
     let requestedURL = 'https://fantasy.premierleague.com/api/leagues-classic/' + leagueId + '/standings/?phase=1&page_standings=' + currentPage;
-    if ((higherPoint - lowerPoint) < 2) {
+    if ((higherPoint - lowerPoint || iterations > 50) < 2) {
       break;
     }
     $.ajax({
@@ -50,6 +51,8 @@ const findTotalPageOfLeague = (leagueId) => {
 
       }
     });
+    
+    iterations += 1;
   }
   return higherPoint;
 }
