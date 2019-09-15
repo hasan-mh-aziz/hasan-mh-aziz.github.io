@@ -9,7 +9,7 @@ $.ajaxPrefilter( function (options) {
 const getLeagueDataFromFplByLeagueIdAndPageNo = (leagueId, pageNo) => {
   return new Promise((resolve, reject) => {
     $.ajax({
-        url: `https://fantasy.premierleague.com/drf/leagues-classic-standings/${leagueId}?phase=1&le-page=1&ls-page=${pageNo}`,
+        url: `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/?phase=1&page_standings=${pageNo}`,
         type: 'GET',
         crossDomain: true,
         success: function (data) {
@@ -28,7 +28,8 @@ const findTotalPageOfLeague = (leagueId) => {
   let higherPoint = 1024*4;
   while(true) {
     currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
-    let requestedURL = 'https://fantasy.premierleague.com/drf/leagues-classic-standings/' + leagueId + '?phase=1&le-page=1&ls-page=' + currentPage;
+    'https://fantasy.premierleague.com/api/leagues-classic/' + leagueId + '/standings/?phase=1&page_standings=' + currentPage;
+    let requestedURL = 'https://fantasy.premierleague.com/api/leagues-classic/' + leagueId + '/standings/?phase=1&page_standings=' + currentPage;
     if ((higherPoint - lowerPoint) < 2) {
       break;
     }
@@ -53,7 +54,7 @@ const findTotalPageOfLeague = (leagueId) => {
   return higherPoint;
 }
 $.ajax({
-  url: 'https://fantasy.premierleague.com/drf/entry/1780403',
+  url: 'https://fantasy.premierleague.com/api/entry/201506/',
   type: "GET",
   success: function(data, textStatus, jqXHR) {
     $("#gameWeekInput").val(data.entry.current_event);
@@ -100,7 +101,7 @@ $(document).on("ready", function(){
     var tempData;
     const requests = [];
     while (currentPage <= totalPage) {
-      var requestedURL = 'https://fantasy.premierleague.com/drf/leagues-classic-standings/' + leagueId + '?phase=1&le-page=1&ls-page=' + currentPage;
+      let requestedURL = 'https://fantasy.premierleague.com/api/leagues-classic/' + leagueId + '/standings/?phase=1&page_standings=' + currentPage;
 
       requests.push(getLeagueDataFromFplByLeagueIdAndPageNo(leagueId, currentPage));
       // $.ajax({
@@ -137,7 +138,7 @@ $(document).on("ready", function(){
       .then((datas) => {
         const rowDatas = datas.reduce((accumulator, data) => {
           const currentIterationRowDatas = data.standings.results.map((playerData) => {
-            const managerProfileLink = 'https://fantasy.premierleague.com/a/team/' + playerData.entry + '/event/' + gw;
+            const managerProfileLink = 'https://fantasy.premierleague.com/entry/' + playerData.entry + '/event/' + gw;
             const tableRow = [
               '',
               playerData.player_name,
