@@ -28,7 +28,6 @@ const findTotalPageOfLeague = (leagueId) => {
   let higherPoint = 1024*4;
   while(true) {
     currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
-    'https://fantasy.premierleague.com/api/leagues-classic/' + leagueId + '/standings/?phase=1&page_standings=' + currentPage;
     let requestedURL = 'https://fantasy.premierleague.com/api/leagues-classic/' + leagueId + '/standings/?phase=1&page_standings=' + currentPage;
     if ((higherPoint - lowerPoint) < 2) {
       break;
