@@ -25,7 +25,7 @@ const findTotalPageOfLeague = (leagueId) => {
   let currentPage = 1;
 
   let lowerPoint = 0;
-  let higherPoint = 1024*4;
+  let higherPoint = 512;
   while(true) {
     currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
     let requestedURL = 'https://fantasy.premierleague.com/api/leagues-classic/' + leagueId + '/standings/?phase=1&page_standings=' + currentPage;
@@ -36,6 +36,7 @@ const findTotalPageOfLeague = (leagueId) => {
       url: requestedURL,
       type: "GET",
       async :false,
+      crossDomain: true,
       success: function(data, textStatus, jqXHR) {
         if (data.standings.has_next) {
           lowerPoint = currentPage;
