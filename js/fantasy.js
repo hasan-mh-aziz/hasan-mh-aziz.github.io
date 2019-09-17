@@ -39,7 +39,7 @@ const findTotalPageOfLeague = (leagueId) => {
       url: requestedURL,
       type: "GET",
       async :false,
-//       crossDomain: true,
+      crossDomain: false,
       success: function(data, textStatus, jqXHR) {
         if (data.standings.has_next) {
           lowerPoint = currentPage;
