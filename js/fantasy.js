@@ -11,7 +11,7 @@ const getLeagueDataFromFplByLeagueIdAndPageNo = (leagueId, pageNo) => {
     $.ajax({
         url: `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/?phase=1&page_standings=${pageNo}`,
         type: 'GET',
-//         crossDomain: true,
+        crossDomain: false,
         success: function (data) {
           resolve(data);
       },
