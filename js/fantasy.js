@@ -12,6 +12,9 @@ const getLeagueDataFromFplByLeagueIdAndPageNo = (leagueId, pageNo) => {
         url: `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/?phase=1&page_standings=${pageNo}`,
         type: 'GET',
         crossDomain: true,
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
         success: function (data) {
           resolve(data);
       },
@@ -39,7 +42,10 @@ const findTotalPageOfLeague = (leagueId) => {
       url: requestedURL,
       type: "GET",
       async :false,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
       crossDomain: true,
       success: function(data, textStatus, jqXHR) {
         if (data.standings.has_next) {
@@ -61,6 +67,9 @@ $.ajax({
   url: 'https://fantasy.premierleague.com/api/entry/201506/',
   type: "GET",
   crossDomain: true,
+  headers: {
+      'Access-Control-Allow-Origin': '*'
+  },
   success: function(data, textStatus, jqXHR) {
     $("#gameWeekInput").val(data.current_event);
   },
