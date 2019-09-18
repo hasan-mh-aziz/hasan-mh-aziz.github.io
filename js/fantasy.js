@@ -1,5 +1,5 @@
 $.ajaxPrefilter( function (options) {
-  if (options.crossDomain && jQuery.support.cors) {
+  if (false && jQuery.support.cors) {
     var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
     options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
     //options.url = "http://cors.corsproxy.io/url=" + options.url;
@@ -60,6 +60,7 @@ const findTotalPageOfLeague = (leagueId) => {
 $.ajax({
   url: 'https://fantasy.premierleague.com/api/entry/201506/',
   type: "GET",
+  crossDomain: true,
   success: function(data, textStatus, jqXHR) {
     $("#gameWeekInput").val(data.current_event);
   },
