@@ -38,9 +38,9 @@ const findTotalPageOfLeague = (leagueId) => {
     $.ajax({
       url: requestedURL,
       type: "GET",
-      async :true,
+      async :false,
       headers: { 'Content-Type': 'application/json' },
-      crossDomain: false,
+      crossDomain: true,
       success: function(data, textStatus, jqXHR) {
         if (data.standings.has_next) {
           lowerPoint = currentPage;
