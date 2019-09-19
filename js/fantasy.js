@@ -76,6 +76,7 @@ $.ajax({
 //   },
   success: function(data, textStatus, jqXHR) {
     console.log(data);
+    data = JSON.parse(data);
     $("#gameWeekInput").val(data.current_event);
   },
   error: function(jqXHR, textStatus, errorThrown) {
