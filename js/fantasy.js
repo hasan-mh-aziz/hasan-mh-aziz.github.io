@@ -18,6 +18,7 @@ const getLeagueDataFromFplByLeagueIdAndPageNo = (leagueId, pageNo) => {
 //             'Access-Control-Allow-Origin': '*'
 //         },
         success: function (data) {
+          data = JSON.parse(data);
           resolve(data);
       },
         error: function(err) {console.log(err)},
@@ -51,6 +52,7 @@ const findTotalPageOfLeague = (leagueId) => {
 //       },
       crossDomain: true,
       success: function(data, textStatus, jqXHR) {
+        data = JSON.parse(data);
         if (data.standings.has_next) {
           lowerPoint = currentPage;
           currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
@@ -75,7 +77,6 @@ $.ajax({
 //       'Access-Control-Allow-Origin': '*'
 //   },
   success: function(data, textStatus, jqXHR) {
-    console.log(data);
     data = JSON.parse(data);
     $("#gameWeekInput").val(data.current_event);
   },
