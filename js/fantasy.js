@@ -68,9 +68,9 @@ $.ajax({
   url: 'https://fantasy.premierleague.com/api/entry/201506/',
   type: "GET",
   crossDomain: true,
-  headers: {
-      'Access-Control-Allow-Origin': '*'
-  },
+//   headers: {
+//       'Access-Control-Allow-Origin': '*'
+//   },
   success: function(data, textStatus, jqXHR) {
     $("#gameWeekInput").val(data.current_event);
   },
