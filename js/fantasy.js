@@ -43,10 +43,10 @@ const findTotalPageOfLeague = (leagueId) => {
       url: requestedURL,
       type: "GET",
       async :false,
-      headers: { 
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
+//       headers: { 
+//         'Content-Type': 'application/json',
+//         'Access-Control-Allow-Origin': '*'
+//       },
       crossDomain: true,
       success: function(data, textStatus, jqXHR) {
         if (data.standings.has_next) {
@@ -72,6 +72,7 @@ $.ajax({
 //       'Access-Control-Allow-Origin': '*'
 //   },
   success: function(data, textStatus, jqXHR) {
+    console.log(data);
     $("#gameWeekInput").val(data.current_event);
   },
   error: function(jqXHR, textStatus, errorThrown) {
