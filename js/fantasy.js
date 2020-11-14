@@ -33,7 +33,7 @@ const findTotalPageOfLeague = (leagueId) => {
   let lowerPoint = 0;
   let higherPoint = 512;
   let iterations = 0;
-  while(true or iterations < 100) {
+  while(true || iterations < 100) {
     iterations += 1;
     console.log(iterations);
     currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
