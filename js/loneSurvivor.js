@@ -51,7 +51,6 @@ const findTotalPageOfLeague = (leagueId) => {
   let iterations = 0;
   while(true || iterations < 100) {
     iterations += 1;
-    console.log(iterations);
     currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
     let requestedURL = `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/?page_new_entries=1&page_standings=${currentPage}&phase=1`;
 //                         https://fantasy.premierleague.com/api/leagues-classic/122225/standings/?page_new_entries=1&page_standings=1&phase=1
@@ -79,6 +78,7 @@ const findTotalPageOfLeague = (leagueId) => {
       }
     });
   }
+  console.log("Total page", higherPoint);
   return higherPoint;
 }
 
@@ -134,7 +134,7 @@ $(document).on("ready", function(){
     while (currentPage <= totalPage) {
       var requestedURL = 'https://fantasy.premierleague.com/api/leagues-classic-standings/' + leagueId + '?phase=1&le-page=1&ls-page=' + currentPage;
 
-//       requests.push(getLeagueDataFromFplByLeagueIdAndPageNo(leagueId, currentPage));
+      requests.push(getLeagueDataFromFplByLeagueIdAndPageNo(leagueId, currentPage));
       currentPage++;
     }
 
