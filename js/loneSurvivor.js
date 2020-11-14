@@ -64,6 +64,7 @@ const findTotalPageOfLeague = (leagueId) => {
       dataType : "json",
       crossDomain: true,
       success: function(data, textStatus, jqXHR) {
+        console.log(higherPoint);
         data = JSON.parse(data);
         if (data.standings.has_next) {
           lowerPoint = currentPage;
