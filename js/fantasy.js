@@ -167,6 +167,7 @@ $(document).on("ready", function(){
               playerData.entry_name,
               playerData.event_total,
               playerData.total,
+              playerData.last_deadline_total_transfers
               playerData.rank,
               '<a href="'+managerProfileLink+'">'+ managerProfileLink +'</a>',
             ];
