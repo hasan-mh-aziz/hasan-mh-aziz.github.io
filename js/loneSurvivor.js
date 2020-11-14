@@ -10,7 +10,8 @@ $.ajaxPrefilter( function (options) {
 const getLeagueDataFromFplByLeagueIdAndPageNo = (leagueId, pageNo) => {
   return new Promise((resolve, reject) => {
     $.ajax({
-        url: `https://fantasy.premierleague.com/api/leagues-classic-standings/${leagueId}?phase=1&le-page=1&ls-page=${pageNo}`,
+//         url: `https://fantasy.premierleague.com/api/leagues-classic-standings/${leagueId}?phase=1&le-page=1&ls-page=${pageNo}`,
+        url: `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/?page_new_entries=1&page_standings=${pageNo}&phase=1`,
         type: 'GET',
         crossDomain: true,
         success: function (data) {
@@ -43,7 +44,7 @@ const findTotalPageOfLeague = (leagueId) => {
   let higherPoint = 1024*4;
   while(true) {
     currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
-    let requestedURL = 'https://fantasy.premierleague.com/api/leagues-classic-standings/' + leagueId + '?phase=1&le-page=1&ls-page=' + currentPage;
+    let requestedURL = `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/?page_new_entries=1&page_standings=${currentPage}&phase=1`,
     if ((higherPoint - lowerPoint) < 2) {
       break;
     }
