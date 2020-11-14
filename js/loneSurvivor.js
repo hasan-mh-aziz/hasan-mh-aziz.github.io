@@ -65,7 +65,7 @@ const findTotalPageOfLeague = (leagueId) => {
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        noError = true;
+        noError = false;
       }
     });
   }
