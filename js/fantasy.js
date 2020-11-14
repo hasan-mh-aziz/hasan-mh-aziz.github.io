@@ -126,63 +126,47 @@ $(document).on("ready", function(){
       let requestedURL = 'https://fantasy.premierleague.com/api/leagues-classic/' + leagueId + '/standings/?phase=1&page_standings=' + currentPage;
 
       requests.push(getLeagueDataFromFplByLeagueIdAndPageNo(leagueId, currentPage));
-      // $.ajax({
-      //   url: requestedURL,
-      //   type: "GET",
-      //   success: function(data, textStatus, jqXHR) {
-      //     tempData = data;
-      //     $(data.standings.results).each(function() {
-      //       var managerProfileLink = 'https://fantasy.premierleague.com/a/team/' + this.entry + '/event/' + gw;
-      //       var tableRow = ['', this.player_name, this.entry_name, this.event_total, this.total, this.rank, '<a href="'+managerProfileLink+'">'+ managerProfileLink +'</a>'];
-      //       datatable.row.add(tableRow).draw( false );
-      //     });
-
-      //     var hasNext = tempData.standings.has_next;
-      //     //console.log(tempData);
-      //     if (!data.standings.has_next) {
-      //       leagueName = tempData.league.name;
-      //       datatable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-      //           cell.innerHTML = i+1;
-      //       } );
-      //       datatable.draw();
-      //     } else {
-      //       currentPage++;
-      //     }
-      //   },
-      //   error: function(jqXHR, textStatus, errorThrown) {
-
-      //   }
-      // });
       currentPage++;
     }
-
+    
     Promise.all(requests)
       .then((datas) => {
-        const rowDatas = datas.reduce((accumulator, data) => {
-          const currentIterationRowDatas = data.standings.results.map((playerData) => {
-            const managerProfileLink = 'https://fantasy.premierleague.com/entry/' + playerData.entry + '/event/' + gw;
-            const tableRow = [
-              '',
-              playerData.player_name,
-              playerData.entry_name,
-              playerData.event_total,
-              playerData.total,
-              playerData.last_deadline_total_transfers,
-              playerData.rank,
-              '<a href="'+managerProfileLink+'">'+ managerProfileLink +'</a>',
-            ];
-            return tableRow;
+        const allPlayerDataApis = datas.reduce((accumulator, data) => {
+          const playerDataApis = data.standings.results.map((playerData) => {
+            return 'https://fantasy.premierleague.com/api/entry/' + playerData.entry;
           });
           return accumulator.concat(currentIterationRowDatas);
         }, []);
-        console.log(rowDatas);
-        datatable.rows.add(rowDatas).draw( false );
-        datatable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-        datatable.draw();
-        $('#ajaxLoaderDiv').hide();
+        console.log(allPlayerDataApis);
       });
+
+//     Promise.all(requests)
+//       .then((datas) => {
+//         const rowDatas = datas.reduce((accumulator, data) => {
+//           const currentIterationRowDatas = data.standings.results.map((playerData) => {
+//             const managerProfileLink = 'https://fantasy.premierleague.com/entry/' + playerData.entry + '/event/' + gw;
+//             const tableRow = [
+//               '',
+//               playerData.player_name,
+//               playerData.entry_name,
+//               playerData.event_total,
+//               playerData.total,
+//               playerData.last_deadline_total_transfers,
+//               playerData.rank,
+//               '<a href="'+managerProfileLink+'">'+ managerProfileLink +'</a>',
+//             ];
+//             return tableRow;
+//           });
+//           return accumulator.concat(currentIterationRowDatas);
+//         }, []);
+//         console.log(rowDatas);
+//         datatable.rows.add(rowDatas).draw( false );
+//         datatable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+//             cell.innerHTML = i+1;
+//         } );
+//         datatable.draw();
+//         $('#ajaxLoaderDiv').hide();
+//       });
   });
 
 });  
