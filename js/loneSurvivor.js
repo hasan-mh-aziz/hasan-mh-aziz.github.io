@@ -60,7 +60,7 @@ const findTotalPageOfLeague = (leagueId) => {
     $.ajax({
       url: requestedURL,
       type: "GET",
-      async :true,
+      async :false,
       dataType : "json",
       crossDomain: true,
       success: function(data, textStatus, jqXHR) {
