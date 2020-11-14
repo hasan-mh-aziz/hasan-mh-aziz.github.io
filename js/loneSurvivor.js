@@ -24,7 +24,7 @@ const getLeagueDataFromFplByLeagueIdAndPageNo = (leagueId, pageNo) => {
 const getPlayerDataById = (playerId, gw, playerName) => {
   return new Promise((resolve, reject) => {
     $.ajax({
-        url: `https://fantasy.premierleague.com/drf/entry/${playerId}/event/${gw}/picks`,
+        url: `https://fantasy.premierleague.com/api/entry/${playerId}`,
         type: 'GET',
         crossDomain: true,
         success: function (data) {
@@ -137,17 +137,14 @@ $(document).on("ready", function(){
         const rowDatas = datas.reduce((accumulator, data) => {
           const playerName = Object.keys(data)
           console.log(playerName[0]);
-          playerData = data[playerName[0]].entry_history;
+          playerData = data[playerName[0]];
           const managerProfileLink = 'https://fantasy.premierleague.com/a/team/' + playerData.entry + '/event/' + gw;
           const tableRow = [
             '',
             playerName[0],
-            playerData.points,
-            playerData.event_transfers_cost,
-            playerData.points,
-            playerData.event_transfers_cost,
-            playerData.total_points,
-            playerData.rank,
+            playerData.summary_event_points,
+            playerData.summary_overall_points,
+            playerData.last_deadline_total_transfers,
             '<a href="'+managerProfileLink+'">'+ managerProfileLink +'</a>',
           ];
           accumulator.push(tableRow);
