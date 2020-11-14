@@ -1,7 +1,8 @@
 $.ajaxPrefilter( function (options) {
   if (options.crossDomain && jQuery.support.cors) {
     var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
-    options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+//     options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+      options.url = "https://www.10coders.com/ffpbBoR/apis/enableCORS?corsUrl=" + options.url;
     //options.url = "http://cors.corsproxy.io/url=" + options.url;
   }
 });
@@ -67,7 +68,7 @@ const findTotalPageOfLeague = (leagueId) => {
   return higherPoint;
 }
 $.ajax({
-  url: 'https://fantasy.premierleague.com/drf/entry/1780403',
+  url: 'https://fantasy.premierleague.com/drf/entry/992654',
   type: "GET",
   success: function(data, textStatus, jqXHR) {
     $("#gameWeekInput").val(data.entry.current_event);
@@ -143,7 +144,8 @@ $(document).on("ready", function(){
             playerName[0],
             playerData.points,
             playerData.event_transfers_cost,
-            playerData.points - playerData.event_transfers_cost,
+            playerData.points,
+            playerData.event_transfers_cost,
             playerData.total_points,
             playerData.rank,
             '<a href="'+managerProfileLink+'">'+ managerProfileLink +'</a>',
