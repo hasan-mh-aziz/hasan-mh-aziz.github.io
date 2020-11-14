@@ -135,7 +135,7 @@ $(document).on("ready", function(){
     while (currentPage <= totalPage) {
       var requestedURL = 'https://fantasy.premierleague.com/api/leagues-classic-standings/' + leagueId + '?phase=1&le-page=1&ls-page=' + currentPage;
 
-      requests.push(getLeagueDataFromFplByLeagueIdAndPageNo(leagueId, currentPage));
+//       requests.push(getLeagueDataFromFplByLeagueIdAndPageNo(leagueId, currentPage));
       currentPage++;
     }
 
