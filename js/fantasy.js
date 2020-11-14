@@ -45,13 +45,13 @@ const findTotalPageOfLeague = (leagueId) => {
     $.ajax({
       url: requestedURL,
       type: "GET",
-      async :false,
+      async :true,
       dataType : "json",
 //       headers: { 
 //         'Content-Type': 'application/json',
 //         'Access-Control-Allow-Origin': '*'
 //       },
-      crossDomain: false,
+      crossDomain: true,
       success: function(data, textStatus, jqXHR) {
         data = JSON.parse(data);
         if (data.standings.has_next) {
@@ -72,7 +72,7 @@ const findTotalPageOfLeague = (leagueId) => {
 $.ajax({
   url: 'https://fantasy.premierleague.com/api/entry/992654/',
   type: "GET",
-  crossDomain: false,
+  crossDomain: true,
   dataType : "json",
 //   headers: {
 //       'Access-Control-Allow-Origin': '*'
