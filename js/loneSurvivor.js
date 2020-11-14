@@ -31,7 +31,9 @@ const getPlayerDataById = (playerId, gw, playerName) => {
         success: function (data) {
           resolve({[playerName]: data});
       },
-        error: function(err) {console.log(err)},
+        error: function(err) {
+          console.log(err);
+        },
     });
   });
 }
@@ -42,7 +44,8 @@ const findTotalPageOfLeague = (leagueId) => {
 
   let lowerPoint = 0;
   let higherPoint = 1024*4;
-  while(true) {
+  let noError = true;
+  while(true && noError) {
     currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
     let requestedURL = `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/?page_new_entries=1&page_standings=${currentPage}&phase=1`,
     if ((higherPoint - lowerPoint) < 2) {
@@ -62,7 +65,7 @@ const findTotalPageOfLeague = (leagueId) => {
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
-
+        noError = true;
       }
     });
   }
