@@ -47,22 +47,25 @@ const findTotalPageOfLeague = (leagueId) => {
   let currentPage = 1;
 
   let lowerPoint = 0;
-  let higherPoint = 1024*4;
-  let noError = true;
-  while(true && noError) {
+  let higherPoint = 512;
+  let iterations = 0;
+  while(true || iterations < 100) {
+    iterations += 1;
+    console.log(iterations);
     currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
     let requestedURL = `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/?page_new_entries=1&page_standings=${currentPage}&phase=1`;
-    if ((higherPoint - lowerPoint) < 2) {
+//                         https://fantasy.premierleague.com/api/leagues-classic/122225/standings/?page_new_entries=1&page_standings=1&phase=1
+    if ((higherPoint - lowerPoint) < 2 || iterations > 50) {
       break;
     }
     $.ajax({
       url: requestedURL,
       type: "GET",
-      async :false,
+      async :true,
       dataType : "json",
+      crossDomain: true,
       success: function(data, textStatus, jqXHR) {
         data = JSON.parse(data);
-        console.log(data);
         if (data.standings.has_next) {
           lowerPoint = currentPage;
           currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
@@ -72,13 +75,13 @@ const findTotalPageOfLeague = (leagueId) => {
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        noError = false;
+
       }
     });
   }
-  console.log(higherPoint);
   return higherPoint;
 }
+
 $.ajax({
   url: 'https://fantasy.premierleague.com/api/entry/3842218/',
   type: "GET",
