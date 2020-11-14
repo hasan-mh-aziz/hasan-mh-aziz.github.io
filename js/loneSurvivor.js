@@ -56,6 +56,7 @@ const findTotalPageOfLeague = (leagueId) => {
       type: "GET",
       async :false,
       success: function(data, textStatus, jqXHR) {
+        console.log(data);
         if (data.standings.has_next) {
           lowerPoint = currentPage;
           currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
