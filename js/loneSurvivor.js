@@ -10,7 +10,7 @@ $.ajaxPrefilter( function (options) {
 const getLeagueDataFromFplByLeagueIdAndPageNo = (leagueId, pageNo) => {
   return new Promise((resolve, reject) => {
     $.ajax({
-        url: `https://fantasy.premierleague.com/drf/leagues-classic-standings/${leagueId}?phase=1&le-page=1&ls-page=${pageNo}`,
+        url: `https://fantasy.premierleague.com/api/leagues-classic-standings/${leagueId}?phase=1&le-page=1&ls-page=${pageNo}`,
         type: 'GET',
         crossDomain: true,
         success: function (data) {
@@ -43,7 +43,7 @@ const findTotalPageOfLeague = (leagueId) => {
   let higherPoint = 1024*4;
   while(true) {
     currentPage = parseInt((lowerPoint + higherPoint)/2, 10);
-    let requestedURL = 'https://fantasy.premierleague.com/drf/leagues-classic-standings/' + leagueId + '?phase=1&le-page=1&ls-page=' + currentPage;
+    let requestedURL = 'https://fantasy.premierleague.com/api/leagues-classic-standings/' + leagueId + '?phase=1&le-page=1&ls-page=' + currentPage;
     if ((higherPoint - lowerPoint) < 2) {
       break;
     }
@@ -68,7 +68,7 @@ const findTotalPageOfLeague = (leagueId) => {
   return higherPoint;
 }
 $.ajax({
-  url: 'https://fantasy.premierleague.com/drf/entry/992654',
+  url: 'https://fantasy.premierleague.com/api/entry/992654',
   type: "GET",
   success: function(data, textStatus, jqXHR) {
     $("#gameWeekInput").val(data.entry.current_event);
