@@ -16,6 +16,7 @@ const getLeagueDataFromFplByLeagueIdAndPageNo = (leagueId, pageNo) => {
         crossDomain: true,
         dataType : "json",
         success: function (data) {
+          data = JSON.parse(data);
           resolve(data);
       },
         error: function(err) {console.log(err)},
@@ -31,6 +32,7 @@ const getPlayerDataById = (playerId, gw, playerName) => {
         crossDomain: true,
         dataType : "json",
         success: function (data) {
+          data = JSON.parse(data);
           resolve({[playerName]: data});
       },
         error: function(err) {
@@ -59,6 +61,7 @@ const findTotalPageOfLeague = (leagueId) => {
       async :false,
       dataType : "json",
       success: function(data, textStatus, jqXHR) {
+        data = JSON.parse(data);
         console.log(data);
         if (data.standings.has_next) {
           lowerPoint = currentPage;
@@ -80,6 +83,7 @@ $.ajax({
   type: "GET",
   dataType : "json",
   success: function(data, textStatus, jqXHR) {
+    data = JSON.parse(data);
     $("#gameWeekInput").val(data.current_event);
   },
   error: function(jqXHR, textStatus, errorThrown) {
