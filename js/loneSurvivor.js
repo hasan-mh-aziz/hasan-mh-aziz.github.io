@@ -27,7 +27,7 @@ const getLeagueDataFromFplByLeagueIdAndPageNo = (leagueId, pageNo) => {
 const getPlayerDataById = (playerId, gw, playerName) => {
   return new Promise((resolve, reject) => {
     $.ajax({
-        url: `https://fantasy.premierleague.com/api/entry/${playerId}`,
+        url: `https://fantasy.premierleague.com/api/entry/${playerId}/`,
         type: 'GET',
         crossDomain: true,
         dataType : "json",
