@@ -126,7 +126,8 @@ $(document).on("ready", function(){
     if($.trim(gw) === '')
       gw = 1;
 
-    const totalPage = findTotalPageOfLeague(leagueId);
+//     const totalPage = findTotalPageOfLeague(leagueId);
+    const totalPage = 10;
     var currentPage = 1;
     var counter = 0;
     var leagueName = '';
